@@ -16,7 +16,7 @@ public class DownloadUtil {
 	private DownloadHttpTool mDownloadHttpTool;
 	private OnDownloadListener onDownloadListener;
 
-	private int fileSize;
+	private static int fileSize;
 	private int downloadedSize = 0;
 
 	@SuppressLint("HandlerLeak")
@@ -95,9 +95,9 @@ public class DownloadUtil {
 
 	//下载回调接口
 	public interface OnDownloadListener {
-		public void downloadStart(int fileSize);
+		public void downloadStart(long fileSize);
 
-		public void downloadProgress(int downloadedSize);
+		public void downloadProgress(long downloadedSize);
 
 		public void downloadEnd();
 	}

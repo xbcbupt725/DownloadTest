@@ -25,7 +25,7 @@ public class MainActivity extends FragmentActivity {
 	private Button reset;
 	private TextView total;
 
-	private int max;
+	private long max;
 
 	private DownloadUtil mDownloadUtil;
 
@@ -39,23 +39,23 @@ public class MainActivity extends FragmentActivity {
 		delete = (Button) findViewById(R.id.button_delete);
 		reset = (Button) findViewById(R.id.button_reset);
 		total = (TextView) findViewById(R.id.textView_total);
-		String urlString = "http://bbra.cn/Uploadfiles/imgs/20110303/fengjin/013.jpg";
+		String urlString = "http://opentest.speech.sogou.com/download/model.awb";
 		String localPath = Environment.getExternalStorageDirectory()
 				.getAbsolutePath() + "/local";
-		mDownloadUtil = new DownloadUtil(2, localPath, "abc.jpg", urlString,
+		mDownloadUtil = new DownloadUtil(2, localPath, "model.awb", urlString,
 				this);
 		mDownloadUtil.setOnDownloadListener(new OnDownloadListener() {
 
 			@Override
-			public void downloadStart(int fileSize) {
+			public void downloadStart(long fileSize) {
 				// TODO Auto-generated method stub
 				Log.w(TAG, "fileSize::" + fileSize);
 				max = fileSize;
-				mProgressBar.setMax(fileSize);
+				mProgressBar.setMax((int) fileSize);
 			}
 
 			@Override
-			public void downloadProgress(int downloadedSize) {
+			public void downloadProgress(long downloadedSize) {
 				// TODO Auto-generated method stub
 				Log.w(TAG, "Compelete::" + downloadedSize);
 				if(isDelete){
@@ -63,8 +63,8 @@ public class MainActivity extends FragmentActivity {
 					mProgressBar.setProgress(0);
 					total.setText("0%");
 				}else{
-					mProgressBar.setProgress(downloadedSize);
-					total.setText((int) downloadedSize * 100 / max + "%");
+					mProgressBar.setProgress((int)downloadedSize);
+					total.setText(downloadedSize*100 /max+ "%");
 				}
 				
 			}
