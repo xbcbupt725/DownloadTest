@@ -33,7 +33,7 @@ public class DownloadHttpTool {
 	private DownlaodSqlTool sqlTool;//文件信息保存的数据库操作类
 
 	private enum Download_State {
-		Downloading, Pause, Ready;//利用枚举表示下载的三种状态
+		Downloading, Pause, Ready,Delete;//利用枚举表示下载的三种状态
 	}
 
 	private Download_State state = Download_State.Ready;//当前下载状态
@@ -98,7 +98,7 @@ public class DownloadHttpTool {
 	
 	public void delete(){
 		compelete();
-		state = Download_State.Ready;
+		state = Download_State.Delete;
 		File file = new File(localPath + "/" + fileName);
 		file.delete();
 	}
